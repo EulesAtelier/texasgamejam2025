@@ -1,10 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bed3anjjipphp"]
+[gd_scene load_steps=15 format=3 uid="uid://bed3anjjipphp"]
 
-[ext_resource type="Texture2D" uid="uid://borvyduruc6sl" path="res://assets/icon.svg" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://b0x0mmqdvt8uq" path="res://scripts/camera.gd" id="1_iywne"]
 [ext_resource type="Script" uid="uid://cui6krusnrpn" path="res://scripts/ui_controller.gd" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://c0u4qu6js0g4y" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Enemies/Tiles/tile_0013.png" id="2_u5sy4"]
 [ext_resource type="FontFile" uid="uid://db5g0lnu3fobx" path="res://assets/OldLondon.ttf" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://y8ucxwrsn0un" path="res://scripts/player.gd" id="3_p57ef"]
+[ext_resource type="Texture2D" uid="uid://dgwsd7as4abge" path="res://assets/kenney_particle-pack/PNG (Transparent)/circle_05.png" id="4_p57ef"]
+[ext_resource type="Texture2D" uid="uid://c6fbio47l3lbl" path="res://assets/hourglass.png" id="6_gee14"]
+[ext_resource type="Texture2D" uid="uid://kv8uk3cjad43" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0063.png" id="8_dinhu"]
+[ext_resource type="Texture2D" uid="uid://brsp7gmxb1rc7" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0216.png" id="9_kvuet"]
+[ext_resource type="Texture2D" uid="uid://jtbig4gfk8g7" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0222.png" id="10_trtic"]
+[ext_resource type="Texture2D" uid="uid://csohaubbwwgv2" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0201.png" id="11_ir15t"]
+[ext_resource type="Texture2D" uid="uid://1g43pbimkgij" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0088.png" id="12_ca42v"]
+
+[sub_resource type="Curve" id="Curve_u5sy4"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -343.82), 0.0, 0.0, 0, 0, Vector2(0.493902, 360), 0.0, 0.0, 0, 0, Vector2(1, -303.371), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Theme" id="Theme_lnu2h"]
 default_font = ExtResource("2_yqjtg")
@@ -13,28 +25,60 @@ default_font_size = 250
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 323)
 script = ExtResource("1_iywne")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(594, 315)
-texture = ExtResource("1_80nbo")
+texture_filter = 3
+position = Vector2(419, 228)
+scale = Vector2(2, 2)
+texture = ExtResource("2_u5sy4")
 script = ExtResource("3_p57ef")
 
-[node name="Control" type="Control" parent="."]
+[node name="Time Energy" type="CPUParticles2D" parent="."]
+visible = false
+position = Vector2(399, 238)
+amount = 4
+texture = ExtResource("4_p57ef")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 141.28
+initial_velocity_max = 458.88
+damping_min = 2.247
+damping_max = 25.843
+angle_curve = SubResource("Curve_u5sy4")
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("timerLabel")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_lnu2h")
+timerLabel = NodePath("Label")
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 933.0
-offset_top = 18.0
-offset_right = 1028.0
-offset_bottom = 41.0
+offset_left = 1084.0
+offset_top = 9.0
+offset_right = 1113.0
+offset_bottom = 32.0
 scale = Vector2(2.16, 2.16)
 text = "5"
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/Label"]
+layout_mode = 1
+offset_left = -29.6296
+offset_top = -2.31481
+offset_right = -0.629642
+offset_bottom = 26.6852
+texture = ExtResource("6_gee14")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="Control"]
 visible = false
@@ -61,3 +105,37 @@ fit_content = true
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Tile0063" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(370, 378)
+scale = Vector2(7.375, 6.75)
+texture = ExtResource("8_dinhu")
+
+[node name="Tile0216" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(635, 405)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("9_kvuet")
+
+[node name="Tile0222" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(758, 341)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("10_trtic")
+
+[node name="Tile0201" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(508, 502)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("11_ir15t")
+
+[node name="Tile0088" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(589, 286)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("12_ca42v")

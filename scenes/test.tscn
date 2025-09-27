@@ -12,7 +12,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.570475)
 projection = 1
 
 [node name="Sprite3D3" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.581337, 0.199683, -0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.581337, 0.199683, -0.708112)
 texture_filter = 2
 texture = ExtResource("3_jcd4p")
 
@@ -27,6 +27,6 @@ texture_filter = 2
 texture = ExtResource("2_at5dv")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(32.712, 0, 0, 0, 33.8234, 1.25613, 0, -2.8111, 15.1139, 0, 0, -0.842492)
+transform = Transform3D(32.712, 0, 0, 0, 32.4502, 4.44398, 0, -9.94519, 14.5003, 0, 0, -1.525)
 texture_filter = 2
 texture = ExtResource("1_lpvoh")

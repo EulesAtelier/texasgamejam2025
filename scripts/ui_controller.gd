@@ -1,6 +1,14 @@
 extends Control
-@onready var playerScript = $"../Sprite2D"
+@export var timer: Timer
 @export var timerLabel: Label
-
+@export var OutOfTimePanel: Panel
 func _process(delta: float) -> void:
-	timerLabel.text = str(playerScript.get_script().getTime())
+	timerLabel.set_text(str(timer.time_left))
+	if(timer.time_left==0):
+		OutOfTimePanel.visible = true
+
+
+func _on_timer_timeout() -> void:
+	OutOfTimePanel.visible = true
+	await get_tree().create_timer(1.0).timeout
+	OutOfTimePanel.visible = false

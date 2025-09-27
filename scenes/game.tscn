@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://bed3anjjipphp"]
+
+[ext_resource type="Texture2D" uid="uid://borvyduruc6sl" path="res://assets/icon.svg" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://b0x0mmqdvt8uq" path="res://scripts/camera.gd" id="1_iywne"]
+[ext_resource type="Script" uid="uid://cui6krusnrpn" path="res://scripts/ui_controller.gd" id="2_lnu2h"]
+[ext_resource type="FontFile" uid="uid://db5g0lnu3fobx" path="res://assets/OldLondon.ttf" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://y8ucxwrsn0un" path="res://scripts/player.gd" id="3_p57ef"]
+
+[sub_resource type="Theme" id="Theme_lnu2h"]
+default_font = ExtResource("2_yqjtg")
+default_font_size = 250
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("1_iywne")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(594, 315)
+texture = ExtResource("1_80nbo")
+script = ExtResource("3_p57ef")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_lnu2h")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 933.0
+offset_top = 18.0
+offset_right = 1028.0
+offset_bottom = 41.0
+scale = Vector2(2.16, 2.16)
+text = "5"
+
+[node name="Panel" type="Panel" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 648.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -21.0
+offset_right = -4.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_lnu2h")
+text = "OUT
+OF
+TIME"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

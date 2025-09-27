@@ -30,6 +30,12 @@ var idle_timer = 5
 var target_position : Vector2
 
 func _physics_process(delta: float) -> void:
+	
+	if get_child(0).overlaps_body($/root/MountainSandTest/Player):
+		$/root/MountainSandTest/Player.health -= 1
+		$/root/MountainSandTest/Player.health = clamp($/root/MountainSandTest/Player.health, 0, 100)
+		print($/root/MountainSandTest/Player.health)
+	
 	match state:
 		ENEMY_STATE.PATROL_WALK:
 			if debug: 

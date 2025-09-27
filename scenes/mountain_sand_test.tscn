@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://duqwcgm3r8307"]
+[gd_scene load_steps=14 format=4 uid="uid://duqwcgm3r8307"]
 
 [ext_resource type="Texture2D" uid="uid://0dd5h31kap4j" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tilemap/tilemap_packed.png" id="1_dfn73"]
 [ext_resource type="Script" uid="uid://y8ucxwrsn0un" path="res://scripts/player.gd" id="2_enfjn"]
@@ -286,6 +286,8 @@ sources/0 = SubResource("TileSetAtlasSource_enfjn")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47nui"]
 size = Vector2(100, 31)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mv27p"]
+
 [node name="MountainSandTest" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -330,6 +332,11 @@ shape = SubResource("RectangleShape2D_47nui")
 [node name="NPC" type="Sprite2D" parent="PatrolArea"]
 texture = ExtResource("5_hdqni")
 script = ExtResource("6_47nui")
+
+[node name="Area2D" type="Area2D" parent="PatrolArea/NPC"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PatrolArea/NPC/Area2D"]
+shape = SubResource("RectangleShape2D_mv27p")
 
 [node name="LabelEnemyState" type="Label" parent="."]
 offset_right = 40.0

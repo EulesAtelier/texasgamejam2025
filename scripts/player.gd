@@ -1,10 +1,21 @@
-extends Sprite2D
+extends CharacterBody2D
 
-@export var time: int = 10
+# Movement speed in pixels per second
+@export var speed: float = 200.0
 
-func _process(delta: float)->void:
-	setTime(delta+time)
-func setTime(newTime: int)->void:
-	time = newTime
-func getTime()-> int:
-	return time;
+func _physics_process(delta: float) -> void:
+	var input_vector = Vector2.ZERO
+
+	if Input.is_action_pressed("ui_right"):
+		input_vector.x += 1
+	if Input.is_action_pressed("ui_left"):
+		input_vector.x -= 1
+	if Input.is_action_pressed("ui_down"):
+		input_vector.y += 1
+	if Input.is_action_pressed("ui_up"):
+		input_vector.y -= 1
+
+	input_vector = input_vector.normalized()
+
+	velocity = input_vector * speed
+	move_and_slide()

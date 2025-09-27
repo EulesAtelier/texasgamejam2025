@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=4 uid="uid://duqwcgm3r8307"]
+[gd_scene load_steps=13 format=4 uid="uid://duqwcgm3r8307"]
 
 [ext_resource type="Texture2D" uid="uid://0dd5h31kap4j" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tilemap/tilemap_packed.png" id="1_dfn73"]
 [ext_resource type="Script" uid="uid://y8ucxwrsn0un" path="res://scripts/player.gd" id="2_enfjn"]
 [ext_resource type="Texture2D" uid="uid://d3n5uggwawykf" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Players/Tiles/tile_0000.png" id="2_uur7n"]
 [ext_resource type="Script" uid="uid://olscdnamurks" path="res://scripts/door.gd" id="4_enfjn"]
+[ext_resource type="Texture2D" uid="uid://b7u75kcfwtkpt" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Players/Tiles/tile_0009.png" id="5_hdqni"]
+[ext_resource type="Script" uid="uid://b4de41eqe80yo" path="res://scripts/npc_patroller.gd" id="6_47nui"]
+[ext_resource type="Texture2D" uid="uid://c6fbio47l3lbl" path="res://assets/hourglass.png" id="7_mv27p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_enfjn"]
 texture = ExtResource("1_dfn73")
@@ -280,6 +283,9 @@ sources/0 = SubResource("TileSetAtlasSource_enfjn")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enfjn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47nui"]
+size = Vector2(100, 31)
+
 [node name="MountainSandTest" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -314,3 +320,26 @@ target_position = Vector2(50, -25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door2"]
 shape = SubResource("RectangleShape2D_enfjn")
+
+[node name="PatrolArea" type="Area2D" parent="."]
+position = Vector2(45, -24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PatrolArea"]
+shape = SubResource("RectangleShape2D_47nui")
+
+[node name="NPC" type="Sprite2D" parent="PatrolArea"]
+texture = ExtResource("5_hdqni")
+script = ExtResource("6_47nui")
+
+[node name="LabelEnemyState" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="LabelEnemyIdleTimer" type="Label" parent="."]
+offset_top = 29.0
+offset_right = 40.0
+offset_bottom = 52.0
+
+[node name="DebugEnemyTarget" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_mv27p")

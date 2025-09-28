@@ -1,13 +1,18 @@
-[gd_scene load_steps=17 format=4 uid="uid://uk0j0sqam184"]
+[gd_scene load_steps=24 format=4 uid="uid://uk0j0sqam184"]
 
 [ext_resource type="Texture2D" uid="uid://0dd5h31kap4j" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tilemap/tilemap_packed.png" id="1_qjxaj"]
 [ext_resource type="Texture2D" uid="uid://dapo70nxcydfk" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0065.png" id="3_lsky2"]
 [ext_resource type="Texture2D" uid="uid://b7u75kcfwtkpt" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Players/Tiles/tile_0009.png" id="5_255p0"]
-[ext_resource type="PackedScene" uid="uid://24ww754kscy6" path="res://scenes/player.tscn" id="5_e184d"]
 [ext_resource type="Script" uid="uid://x1h5412l7s7f" path="res://scripts/npc_patroller.gd" id="6_rklxl"]
 [ext_resource type="Texture2D" uid="uid://c6fbio47l3lbl" path="res://assets/hourglass.png" id="7_dbwep"]
 [ext_resource type="Script" uid="uid://dmjgjw76y4avu" path="res://scripts/falling_sand.gd" id="8_fuc0k"]
 [ext_resource type="PackedScene" uid="uid://b4olcy3r1tcuj" path="res://scenes/portal.tscn" id="9_e184d"]
+[ext_resource type="PackedScene" uid="uid://bo6stqso4mx4l" path="res://scenes/player (2).tscn" id="9_lsky2"]
+[ext_resource type="PackedScene" uid="uid://bt0owhwbwrp5m" path="res://scenes/EnemyA.tscn" id="9_nesqq"]
+[ext_resource type="Shader" uid="uid://bam47ngbt6bu4" path="res://timeshine.gdshader" id="10_nesqq"]
+[ext_resource type="Texture2D" uid="uid://cyf7hmvfvfydq" path="res://assets/hourglassPowerup.png" id="11_lsky2"]
+[ext_resource type="Script" uid="uid://dnbjq3baf0rjw" path="res://scenes/time.gd" id="12_rklxl"]
+[ext_resource type="AudioStream" uid="uid://xfepb3hx0tci" path="res://assets/kenney_desert-shooter-pack_1.0/Sounds/coin-c.ogg" id="13_dbwep"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_enfjn"]
 texture = ExtResource("1_qjxaj")
@@ -1323,6 +1328,17 @@ size = Vector2(100, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mv27p"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lsky2"]
+shader = ExtResource("10_nesqq")
+shader_parameter/shine_color = Color(0.913725, 0.776471, 0, 1)
+shader_parameter/line_width = 0.1
+shader_parameter/angle = 0.785398
+shader_parameter/speed = 1.0
+shader_parameter/wait_cycles = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e184d"]
+radius = 327.213
+
 [node name="Overworld" type="Node"]
 
 [node name="TerrainMap" type="TileMapLayer" parent="."]
@@ -1367,24 +1383,23 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="LabelEnemyState" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 metadata/_edit_use_anchors_ = true
 
 [node name="LabelEnemyIdleTimer" type="Label" parent="."]
+visible = false
 offset_top = 29.0
 offset_right = 40.0
 offset_bottom = 52.0
 metadata/_edit_use_anchors_ = true
 
 [node name="DebugEnemyTarget" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, 142)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_dbwep")
-
-[node name="Player" parent="." instance=ExtResource("5_e184d")]
-z_index = 5
-speed = 100.0
 
 [node name="Door" parent="." node_paths=PackedStringArray("exit") instance=ExtResource("9_e184d")]
 position = Vector2(2415, -171)
@@ -1401,3 +1416,32 @@ exit = NodePath("../Door4")
 [node name="Door4" parent="." node_paths=PackedStringArray("exit") instance=ExtResource("9_e184d")]
 position = Vector2(2529, -1097)
 exit = NodePath("../Door3")
+
+[node name="EnemyA" parent="." node_paths=PackedStringArray("patrol_area") instance=ExtResource("9_nesqq")]
+position = Vector2(619, -91)
+patrol_area = NodePath("../PatrolArea2")
+
+[node name="Player" parent="." instance=ExtResource("9_lsky2")]
+
+[node name="PatrolArea2" type="Area2D" parent="."]
+position = Vector2(618, -85)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PatrolArea2"]
+shape = SubResource("RectangleShape2D_47nui")
+
+[node name="Time" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_lsky2")
+position = Vector2(485, -88)
+scale = Vector2(0.10805, 0.10805)
+texture = ExtResource("11_lsky2")
+script = ExtResource("12_rklxl")
+
+[node name="Area2D" type="Area2D" parent="Time"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Time/Area2D"]
+shape = SubResource("CircleShape2D_e184d")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Time"]
+stream = ExtResource("13_dbwep")
+
+[connection signal="body_entered" from="Time/Area2D" to="Time" method="_on_area_2d_body_entered"]

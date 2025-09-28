@@ -3,7 +3,7 @@ extends Control
 @export var timerLabel: Label
 @export var OutOfTimePanel: Panel
 func _process(delta: float) -> void:
-	timerLabel.set_text(str(timer.time_left))
+	timerLabel.set_text(str(int(timer.time_left)))
 	if(timer.time_left==0):
 		OutOfTimePanel.visible = true
 

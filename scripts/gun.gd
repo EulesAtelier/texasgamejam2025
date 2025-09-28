@@ -4,7 +4,7 @@ extends Sprite2D
 func _process(delta: float) -> void:
 	self.look_at(get_global_mouse_position())
 	if(Input.is_action_just_pressed("shoot") && timer.time_left != 0 && timer.time_left-5 >= 0):
-		print("shoot")
+		$AudioStreamPlayer2D.play(0)
 		var instance = bullet.instantiate()
 		var mouse_pos = get_global_mouse_position()
 		var direction = (mouse_pos - global_position).normalized()
@@ -15,3 +15,5 @@ func _process(delta: float) -> void:
 		timer.stop()
 		timer.wait_time -= 5  # New time in seconds
 		timer.start()
+	if(Input.is_action_just_pressed("shoot") && timer.time_left != 0 && timer.time_left-5 <= 0):
+		$"../LabelTime"._on_timer_timeout()

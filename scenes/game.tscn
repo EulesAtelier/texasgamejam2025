@@ -1,32 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://bed3anjjipphp"]
+[gd_scene load_steps=15 format=3 uid="uid://bed3anjjipphp"]
 
+[ext_resource type="Script" uid="uid://b0x0mmqdvt8uq" path="res://scripts/camera.gd" id="1_iywne"]
 [ext_resource type="Script" uid="uid://cui6krusnrpn" path="res://scripts/ui_controller.gd" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://c0u4qu6js0g4y" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Enemies/Tiles/tile_0013.png" id="2_u5sy4"]
 [ext_resource type="FontFile" uid="uid://db5g0lnu3fobx" path="res://assets/OldLondon.ttf" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://y8ucxwrsn0un" path="res://scripts/player.gd" id="3_p57ef"]
 [ext_resource type="Texture2D" uid="uid://dgwsd7as4abge" path="res://assets/kenney_particle-pack/PNG (Transparent)/circle_05.png" id="4_p57ef"]
 [ext_resource type="Texture2D" uid="uid://c6fbio47l3lbl" path="res://assets/hourglass.png" id="6_gee14"]
-[ext_resource type="Texture2D" uid="uid://dnp1blys87lp6" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Weapons/Tiles/tile_0007.png" id="8_vtaks"]
-[ext_resource type="Script" uid="uid://3hejs3s6s266" path="res://scenes/gun.gd" id="9_vtaks"]
-[ext_resource type="PackedScene" uid="uid://b2uqolmwub26u" path="res://bullet.tscn" id="10_vtaks"]
-[ext_resource type="Shader" uid="uid://fnmr6gb1ep7y" path="res://sand.gdshader" id="13_trtic"]
-[ext_resource type="Texture2D" uid="uid://5vb5pyp6u0bb" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0158.png" id="14_trtic"]
+[ext_resource type="Texture2D" uid="uid://kv8uk3cjad43" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0063.png" id="8_dinhu"]
+[ext_resource type="Texture2D" uid="uid://brsp7gmxb1rc7" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0216.png" id="9_kvuet"]
+[ext_resource type="Texture2D" uid="uid://jtbig4gfk8g7" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0222.png" id="10_trtic"]
+[ext_resource type="Texture2D" uid="uid://csohaubbwwgv2" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0201.png" id="11_ir15t"]
+[ext_resource type="Texture2D" uid="uid://1g43pbimkgij" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Tiles/Tiles/tile_0088.png" id="12_ca42v"]
 
 [sub_resource type="Curve" id="Curve_u5sy4"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, -343.82), 0.0, 0.0, 0, 0, Vector2(0.493902, 360), 0.0, 0.0, 0, 0, Vector2(1, -303.371), 0.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir15t"]
-shader = ExtResource("13_trtic")
-shader_parameter/water_color_1 = Color(0.603922, 0.498039, 0.266667, 1)
-shader_parameter/water_color_2 = Color(0.65098, 0.462745, 0, 1)
-shader_parameter/water_level_percentage = 0.9
-shader_parameter/wave_frequency_1 = 6.655
-shader_parameter/wave_amplitude_1 = 0.05
-shader_parameter/wave_frequency_2 = 15.0
-shader_parameter/wave_amplitude_2 = 0.03
-shader_parameter/pixelation_level = 40.0
-shader_parameter/color_variation_strength = 0.05
-shader_parameter/color_flow_speed = 1.0
 
 [sub_resource type="Theme" id="Theme_lnu2h"]
 default_font = ExtResource("2_yqjtg")
@@ -34,25 +24,16 @@ default_font_size = 250
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Timer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 100.0
-one_shot = true
-autostart = true
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(575, 323)
+script = ExtResource("1_iywne")
 
-[node name="Bullet" parent="Timer" instance=ExtResource("10_vtaks")]
-rotation = 1.5708
-script = null
-
-[node name="BulletHandler" type="Node" parent="."]
-
-[node name="Gun" type="Sprite2D" parent="." node_paths=PackedStringArray("timer")]
-position = Vector2(567, 335)
-scale = Vector2(4.46571, 4.46571)
-texture = ExtResource("8_vtaks")
-script = ExtResource("9_vtaks")
-timer = NodePath("../Timer")
-bullet = ExtResource("10_vtaks")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+position = Vector2(419, 228)
+scale = Vector2(2, 2)
+texture = ExtResource("2_u5sy4")
+script = ExtResource("3_p57ef")
 
 [node name="Time Energy" type="CPUParticles2D" parent="."]
 visible = false
@@ -70,24 +51,13 @@ angle_curve = SubResource("Curve_u5sy4")
 scale_amount_min = 0.1
 scale_amount_max = 0.2
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Tile0089" type="Sprite2D" parent="."]
-texture_filter = 3
-material = SubResource("ShaderMaterial_ir15t")
-position = Vector2(585, 911)
-scale = Vector2(71.8125, 50.4201)
-texture = ExtResource("14_trtic")
-
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("timer", "timerLabel", "OutOfTimePanel")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("timerLabel")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_lnu2h")
-timer = NodePath("../Timer")
 timerLabel = NodePath("Label")
-OutOfTimePanel = NodePath("Panel")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Control"]
@@ -136,4 +106,36 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="timeout" from="Timer" to="Control" method="_on_timer_timeout"]
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Tile0063" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(370, 378)
+scale = Vector2(7.375, 6.75)
+texture = ExtResource("8_dinhu")
+
+[node name="Tile0216" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(635, 405)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("9_kvuet")
+
+[node name="Tile0222" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(758, 341)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("10_trtic")
+
+[node name="Tile0201" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(508, 502)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("11_ir15t")
+
+[node name="Tile0088" type="Sprite2D" parent="Node2D"]
+texture_filter = 3
+position = Vector2(589, 286)
+scale = Vector2(4.52, 4.52)
+texture = ExtResource("12_ca42v")

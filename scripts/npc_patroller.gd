@@ -31,16 +31,16 @@ var target_position : Vector2
 
 func _physics_process(delta: float) -> void:
 	
-	if get_child(0).overlaps_body($/root/MountainSandTest/Player):
-		$/root/MountainSandTest/Player.health -= 1
-		$/root/MountainSandTest/Player.health = clamp($/root/MountainSandTest/Player.health, 0, 100)
-		print($/root/MountainSandTest/Player.health)
+	if get_child(0).overlaps_body($/root/Overworld/Player):
+		$/root/Overworld/Player.health -= 1
+		$/root/Overworld/Player.health = clamp($/root/Overworld/Player.health, 0, 100)
+		print($/root/Overworld/Player.health)
 	
 	match state:
 		ENEMY_STATE.PATROL_WALK:
 			if debug: 
-				$/root/MountainSandTest/LabelEnemyState.text = "WALK"
-				$/root/MountainSandTest/DebugEnemyTarget.position = target_position
+				$/root/Overworld/LabelEnemyState.text = "WALK"
+				$/root/Overworld/DebugEnemyTarget.position = target_position
 			var walk_dir : Vector2 = target_position - global_position
 			if walk_dir.length() < 0.1:
 				idle_timer = randf_range(min_idle_time, max_idle_time)
@@ -50,8 +50,8 @@ func _physics_process(delta: float) -> void:
 				self.translate(walk_dir * walk_speed * delta)
 		ENEMY_STATE.PATROL_IDLE:
 			if debug: 
-				$/root/MountainSandTest/LabelEnemyState.text = "IDLE"
-				$/root/MountainSandTest/LabelEnemyIdleTimer.text = str(idle_timer)
+				$/root/Overworld/LabelEnemyState.text = "IDLE"
+				$/root/Overworld/LabelEnemyIdleTimer.text = str(idle_timer)
 			if idle_timer <= 0:
 				# choose new target coord
 				var rect : RectangleShape2D = $"../CollisionShape2D".shape

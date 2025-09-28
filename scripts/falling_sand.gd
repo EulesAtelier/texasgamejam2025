@@ -1,6 +1,6 @@
 extends TileMapLayer
 
-var height = 1000
+var height = 999
 var fall_speed = 1
 
 func update():

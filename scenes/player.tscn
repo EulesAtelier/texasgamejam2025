@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://24ww754kscy6"]
+
+[ext_resource type="Script" uid="uid://y8ucxwrsn0un" path="res://scripts/player.gd" id="1_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://d3n5uggwawykf" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Players/Tiles/tile_0000.png" id="2_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://c6fbio47l3lbl" path="res://assets/hourglass.png" id="3_fjrip"]
+[ext_resource type="Script" uid="uid://h7xuavullup4" path="res://scripts/gun.gd" id="4_smehm"]
+[ext_resource type="PackedScene" uid="uid://b2uqolmwub26u" path="res://scenes/bullet.tscn" id="5_ur7pv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uur7n"]
+size = Vector2(20, 2)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_qlg0r")
+
+[node name="Clockworth" type="Sprite2D" parent="."]
+texture = ExtResource("2_tuyoq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_uur7n")
+
+[node name="Gun" type="Sprite2D" parent="." node_paths=PackedStringArray("timer")]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_fjrip")
+script = ExtResource("4_smehm")
+timer = NodePath("Timer")
+bullet = ExtResource("5_ur7pv")
+
+[node name="Timer" type="Timer" parent="Gun"]
+wait_time = 4096.0
+autostart = true

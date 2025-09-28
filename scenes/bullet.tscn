@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2uqolmwub26u"]
+
+[ext_resource type="Texture2D" uid="uid://bh28ehpxwrnxq" path="res://assets/kenney_desert-shooter-pack_1.0/PNG/Interface/Tiles/tile_0058.png" id="1_buotd"]
+[ext_resource type="Script" uid="uid://dpdfr3tuy87sv" path="res://scripts/bullet.gd" id="2_v8qja"]
+
+[node name="Bullet" type="Sprite2D"]
+texture = ExtResource("1_buotd")
+script = ExtResource("2_v8qja")
